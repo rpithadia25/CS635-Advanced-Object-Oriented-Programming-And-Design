@@ -7,10 +7,10 @@ import java.util.NoSuchElementException;
 
 public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 
-	private Node<E> head;
-	private Node<E> tail;
-	public int size;
-	private Algorithm algorithm;
+	private Node<E> 	head;
+	private Node<E> 	tail;
+	public 	int 		size;
+	private Algorithm 	algorithm;
 
 	public DoublyLinkedList(Algorithm algorithm) {
 		head = null;
@@ -34,6 +34,11 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 	//Insert student lexicographically
 	@Override
 	public boolean add(E element) {
+		
+		//Null values should not be allowed
+		if(element == null) {
+			throw new NullPointerException();
+		}
 		
 		Node<E> dataNode = new Node<E>(element);
 
