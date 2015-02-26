@@ -1,17 +1,18 @@
 package assignment2;
 
-public class SortByRedId implements Algorithm {
+public class SortByRedId implements SortStrategy {
 
 	@Override
-	public boolean add(Node head, Object element) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean add(Object element) {
+		Student student = (Student) element;
+		student.setStrategy(new SortByRedId());
+		return true;
 	}
 
 	@Override
-	public boolean sort() {
+	public int compare(Object firstElement, Object secondElement) {
 		// TODO Auto-generated method stub
-		return false;
+		return 0;
 	}
 
 }

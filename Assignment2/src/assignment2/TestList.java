@@ -4,9 +4,9 @@ import java.util.Iterator;
 
 public class TestList {
 
-	public static void main(String[] args) throws IndexOutOfBoundsException {
+	public static <E> void main(String[] args) throws IndexOutOfBoundsException {
 		
-		DoublyLinkedList<Student> list = new DoublyLinkedList<Student>();
+		DoublyLinkedList<Student> list = new DoublyLinkedList<Student>(new SortByRedId());
 		
 		Student drake =  new Student();
 		drake.setGpa(4.00);
@@ -37,10 +37,10 @@ public class TestList {
 		Iterator<Student> itr = list.iterator();
 		while(itr.hasNext())
 			System.out.println(itr.next() + " ");
-//		
-//		list.printKthStudent(4);
+		
+//		list.printKthStudent(2);
 //		list.printAllStudents();
-		//list.printHonorNames();
-		//list.printProbationRedIds();
+//		list.printHonorNames();
+//		list.printProbationRedIds();
 	}
 }

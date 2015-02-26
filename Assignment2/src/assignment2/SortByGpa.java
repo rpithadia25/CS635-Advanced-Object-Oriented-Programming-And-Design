@@ -1,17 +1,17 @@
 package assignment2;
 
-public class SortByGpa implements Algorithm{
+public class SortByGpa implements SortStrategy{
 
 	@Override
-	public boolean add(Node head, Object element) {
+	public boolean add(Object element) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
-	public boolean sort() {
+	public int compare(Object firstElement, Object secondElement) {
 		// TODO Auto-generated method stub
-		return false;
+		return 0;
 	}
 
 }

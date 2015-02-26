@@ -7,20 +7,15 @@ import java.util.NoSuchElementException;
 
 public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 
-	private Node<E> 	head;
-	private Node<E> 	tail;
-	public 	int 		size;
-	private Algorithm 	algorithm;
+	private Node<E> 		head;
+	private Node<E> 		tail;
+	public 	int 			size;
+	private SortStrategy<E> sortStrategy;
 
-	public DoublyLinkedList(Algorithm algorithm) {
-		head = null;
-		this.algorithm = algorithm;
-	}
-	
-	public DoublyLinkedList() {
+	public DoublyLinkedList(SortStrategy<E> algorithm) {
 		head = null;
 		tail = null;
-		size = 0;
+		this.sortStrategy = algorithm;
 	}
 
 	public boolean isEmpty() {
@@ -31,7 +26,7 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 		return size;
 	}
 
-	//Insert student lexicographically
+	//Add element
 	@Override
 	public boolean add(E element) {
 		
@@ -39,33 +34,39 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 		if(element == null) {
 			throw new NullPointerException();
 		}
-		
-		Node<E> dataNode = new Node<E>(element);
 
-		//Check if the list is empty
-		if(head == null && tail == null) {
-			head = dataNode;
+		if(head == null) {
+			head = null;
+			head = new Node<E>(element);
 			tail = head;
 			size++;
 			return true;
-		} 
-
-		Node<E> currentNode = head;
-		Comparable<E> comparable = (Comparable<E>) currentNode.getNodeData();
+		}
 		
-		//Condition to keep iterating when the input is lexicographically greater
-		while (currentNode.getNext() != null && (comparable.compareTo(element) < 0 )) {
+		sortStrategy.add(element);
+		
+		Node<E> dataNode = new Node<E>(element);
+		Node<E> currentNode = head;
+
+		//Condition to keep iterating when the input is greater
+//		while (currentNode.getNext() != null && ((((Student) currentNode.getNodeData()).compareTo(element)) < 0 )) {
+//			currentNode = currentNode.getNext();
+//		}
+		
+		Comparable<E> comparable = (Comparable<E>) currentNode.getNodeData();
+		while (currentNode.getNext() != null && ((comparable.compareTo(element)) < 0 )) {
 			currentNode = currentNode.getNext();
 		}
-
-		//Input is lexicographically less than all the names
-		if(currentNode == head && (comparable.compareTo(element) > 0)) {
+		
+		//Input is less than all the elements
+		if(currentNode == head  && ((comparable.compareTo(element)) > 0)) {
 			insertFirst(dataNode);
 			return true;
 		}
-
-		//Input is lexicographically greater than all the names
-		if(currentNode.getNext() == null && (comparable.compareTo(element) < 0)) {
+		
+//		Input is greater than all the elements
+		if(currentNode.getNext() == null && ((comparable.compareTo(element)) < 0)) {
+			
 			insertLast(dataNode);
 			return true;
 		}
@@ -75,56 +76,76 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 		dataNode.setPrevious(currentNode.getPrevious());
 		currentNode.getPrevious().setNext(dataNode);
 		currentNode.setPrevious(dataNode);
-		size++;
 		return true;
+
+	}
+	
+	private void insertFirst(Node<E> element) {
+		if( isEmpty() )                
+			tail = element;            
+		else
+			head.setPrevious(element);   
+		element.setNext(head);        
+		head = element;               
+	}
+
+	private void insertLast(Node<E> element) {
+		if( isEmpty() )                
+			head = element;         
+		else {
+			tail.setNext(element);     
+			element.setPrevious(tail); 
+		}
+		tail = element;             
 	}
 
 	public void printKthStudent(int k) throws IndexOutOfBoundsException {
 		if(head != null) {
-			Node<E> currentStudent = head;
+			Node<E> currentNode = head;
 			int i = 0;
-			while(currentStudent != null && i < k) {
-				currentStudent = currentStudent.getNext();
+			while(currentNode != null && i < k) {
+				currentNode = currentNode.getNext();
 				i++;
 			}
-			if(currentStudent == null)
+			
+			if(currentNode == null)
 				throw new IndexOutOfBoundsException("k is out of bounds.");
 			else
-				System.out.print("The k'th student is: "+currentStudent.getNodeData().toString()+"\n");
+				System.out.print("The k'th student is: "+currentNode.getNodeData().toString()+"\n");
 		}
 	}
 
 	//Print RedIds of students with GPA < 2.85
-//	public void printProbationRedIds() {
-//		if(head != null) {
-//			Node currentStudent = head;
-//			System.out.println("\nProbation List:");
-//			while (currentStudent != null) {
-//				if(currentStudent.getNodeData().getGpa() < 2.85) {
-//					System.out.println(currentStudent.getNodeData().getRedId());
-//					currentStudent = currentStudent.getNext();
-//				} else
-//					currentStudent = currentStudent.getNext();
-//			}
-//		}
-//	}
+	//	public void printProbationRedIds() {
+	//		if(head != null) {
+	//			Node currentStudent = head;
+	//			System.out.println("\nProbation List:");
+	//			while (currentStudent != null) {
+	//				if(currentStudent.getNodeData().getGpa() < 2.85) {
+	//					System.out.println(currentStudent.getNodeData().getRedId());
+	//					currentStudent = currentStudent.getNext();
+	//				} else
+	//					currentStudent = currentStudent.getNext();
+	//			}
+	//		}
+	//	}
 
 	//Print name of students with GPA = 4.0
-//	public void printHonorNames() {
-//		if(head != null) {
-//			Node currentStudent = tail;
-//			System.out.println("\nHonor List:");
-//			while(currentStudent != null) {
-//				if(currentStudent.getNodeData().getGpa() == 4.0) {
-//					System.out.println(currentStudent.getNodeData().getName());
-//					currentStudent = currentStudent.getPrevious();
-//				} else
-//					currentStudent = currentStudent.getPrevious();
-//			}
-//		}
-//	}
+	//	public void printHonorNames() {
+	//		if(head != null) {
+	//			Node currentStudent = tail;
+	//			System.out.println("\nHonor List:");
+	//			while(currentStudent != null) {
+	//				if(currentStudent.getNodeData().getGpa() == 4.0) {
+	//					System.out.println(currentStudent.getNodeData().getName());
+	//					currentStudent = currentStudent.getPrevious();
+	//				} else
+	//					currentStudent = currentStudent.getPrevious();
+	//			}
+	//		}
+	//	}
 
-	public void printAllStudents() {
+	public void getAll() {
 		if(size == 0) {
 			return;
 		}
@@ -138,52 +159,33 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 		}
 	}
 
-	private void insertFirst(Node<E> student) {
-		if( isEmpty() )                
-			tail = student;            
-		else
-			head.setPrevious(student);   
-		student.setNext(head);        
-		head = student;               
-	}
-
-	private void insertLast(Node<E> student) {
-		if( isEmpty() )                
-			head = student;         
-		else {
-			tail.setNext(student);     
-			student.setPrevious(tail); 
-		}
-		tail = student;             
-	}
-	
 	@Override
 	public Iterator<E> iterator() {
 		return new DoublyLinkedListIterator();
 	}
-	
+
 	@Override
 	public Object[] toArray() {
 		// TODO Auto-generated method stub
 		return super.toArray();
 	}
-	
+
 	@Override
 	public <T> T[] toArray(T[] a) {
 		// TODO Auto-generated method stub
 		return super.toArray(a);
 	}
-	
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
 		return super.toString();
 	}
-	
+
 	private class DoublyLinkedListIterator implements Iterator<E> {
-		
+
 		private Node<E> current;
-		
+
 		private DoublyLinkedListIterator() {
 			current = head;
 		}
@@ -196,7 +198,7 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 		@Override
 		public E next() {
 			if(hasNext()) {
-				E result =  current.getNodeData();
+				E result = current.getNodeData();
 				current = current.getNext();
 				return result;
 			}
