@@ -1,6 +1,5 @@
 package assignment2;
 
 public interface SortStrategy<E> {
-	public boolean add(E element);
-	public int compare(E firstElement, E secondElement);
+	public int compareWith(E firstElement, E secondElement);
 }

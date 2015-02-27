@@ -6,8 +6,8 @@ public class TestList {
 
 	public static <E> void main(String[] args) throws IndexOutOfBoundsException {
 		
-		DoublyLinkedList<Student> list = new DoublyLinkedList<Student>(new SortByName());
-//		DoublyLinkedList<Student> list = new DoublyLinkedList<Student>(new SortByRedId());
+//		DoublyLinkedList<Student> list = new DoublyLinkedList<Student>(new SortByName());
+		DoublyLinkedList<Student> list = new DoublyLinkedList<Student>(new SortByRedId());
 //		DoublyLinkedList<Student> list = new DoublyLinkedList<Student>(new SortByGpa());
 		
 		Student drake =  new Student();

@@ -3,7 +3,6 @@ package assignment2;
 import java.util.AbstractSequentialList;
 import java.util.Iterator;
 import java.util.ListIterator;
-import java.util.NoSuchElementException;
 
 public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 
@@ -43,23 +42,21 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 			return true;
 		}
 		
-		sortStrategy.add(element);
-		
 		Node<E> dataNode = new Node<E>(element);
 		Node<E> currentNode = head;
 
-		while (currentNode.getNext() != null && (sortStrategy.compare(currentNode.getNodeData(), element)) < 0) {
+		while (currentNode.getNext() != null && (sortStrategy.compareWith(currentNode.getNodeData(), element)) < 0) {
 			currentNode = currentNode.getNext();
 		}
 		
 		//Input is less than all the elements
-		if(currentNode == head  && (sortStrategy.compare(currentNode.getNodeData(), element)) > 0) {
+		if(currentNode == head  && (sortStrategy.compareWith(currentNode.getNodeData(), element)) > 0) {
 			insertFirst(dataNode);
 			return true;
 		}
 		
 		//Input is greater than all the elements
-		if(currentNode.getNext() == null && (sortStrategy.compare(currentNode.getNodeData(), element)) < 0) {
+		if(currentNode.getNext() == null && (sortStrategy.compareWith(currentNode.getNodeData(), element)) < 0) {
 			
 			insertLast(dataNode);
 			return true;
@@ -71,7 +68,6 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 		currentNode.getPrevious().setNext(dataNode);
 		currentNode.setPrevious(dataNode);
 		return true;
-
 	}
 	
 	private void insertFirst(Node<E> element) {
