@@ -1,6 +1,6 @@
 package assignment2;
 
-public class Student implements Comparable{
+public class Student {
 
 	private SortStrategy strategy;
 	private String name;
@@ -35,17 +35,17 @@ public class Student implements Comparable{
 		return name.toString();
 	}
 	
-	@Override
-	public int compareTo(Object o) {
-		Student student = (Student) o;
-		this.strategy = student.strategy;
-		if(strategy.getClass() == (SortByName.class)){
-			return this.name.compareToIgnoreCase(student.name);
-		} else if (strategy.getClass() == (SortByGpa.class)){
-			return 0;
-		} else {
-			return this.redId.compareToIgnoreCase(student.redId);
-		}
-	}
+//	@Override
+//	public int compareTo(Object o) {
+//		Student student = (Student) o;
+//		this.strategy = student.strategy;
+//		if(strategy.getClass() == (SortByName.class)){
+//			return this.name.compareToIgnoreCase(student.name);
+//		} else if (strategy.getClass() == (SortByGpa.class)){
+//			return 0;
+//		} else {
+//			return this.redId.compareToIgnoreCase(student.redId);
+//		}
+//	}
 
 }

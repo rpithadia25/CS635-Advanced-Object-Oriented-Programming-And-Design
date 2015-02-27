@@ -10,8 +10,6 @@ public class SortByGpa implements SortStrategy{
 
 	@Override
 	public int compare(Object firstElement, Object secondElement) {
-		// TODO Auto-generated method stub
-		return 0;
+		return Double.compare(((Student) firstElement).getGpa(), ((Student) secondElement).getGpa());
 	}
-
 }

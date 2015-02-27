@@ -11,8 +11,7 @@ public class SortByRedId implements SortStrategy {
 
 	@Override
 	public int compare(Object firstElement, Object secondElement) {
-		// TODO Auto-generated method stub
-		return 0;
+		return ((Student) firstElement).getRedId().compareTo(((Student) secondElement).getRedId());
 	}
 
 }

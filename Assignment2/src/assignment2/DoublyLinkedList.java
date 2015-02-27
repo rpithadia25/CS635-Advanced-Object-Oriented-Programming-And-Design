@@ -53,19 +53,22 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 //			currentNode = currentNode.getNext();
 //		}
 		
-		Comparable<E> comparable = (Comparable<E>) currentNode.getNodeData();
-		while (currentNode.getNext() != null && ((comparable.compareTo(element)) < 0 )) {
+		//Comparable<E> comparable = (Comparable<E>) currentNode.getNodeData();
+		
+		
+		//(comparable.compareTo(element)) < 0  was being used
+		while (currentNode.getNext() != null && (sortStrategy.compare(currentNode.getNodeData(), element)) < 0) {
 			currentNode = currentNode.getNext();
 		}
 		
 		//Input is less than all the elements
-		if(currentNode == head  && ((comparable.compareTo(element)) > 0)) {
+		if(currentNode == head  && (sortStrategy.compare(currentNode.getNodeData(), element)) > 0) {
 			insertFirst(dataNode);
 			return true;
 		}
 		
-//		Input is greater than all the elements
-		if(currentNode.getNext() == null && ((comparable.compareTo(element)) < 0)) {
+		//Input is greater than all the elements
+		if(currentNode.getNext() == null && (sortStrategy.compare(currentNode.getNodeData(), element)) < 0) {
 			
 			insertLast(dataNode);
 			return true;
