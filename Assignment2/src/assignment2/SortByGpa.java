@@ -4,7 +4,8 @@ public class SortByGpa implements SortStrategy{
 
 	@Override
 	public boolean add(Object element) {
-		// TODO Auto-generated method stub
+		Student student = (Student) element;
+		student.setStrategy(new SortByGpa());
 		return true;
 	}
 

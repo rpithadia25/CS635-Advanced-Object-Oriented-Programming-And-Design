@@ -48,15 +48,6 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 		Node<E> dataNode = new Node<E>(element);
 		Node<E> currentNode = head;
 
-		//Condition to keep iterating when the input is greater
-//		while (currentNode.getNext() != null && ((((Student) currentNode.getNodeData()).compareTo(element)) < 0 )) {
-//			currentNode = currentNode.getNext();
-//		}
-		
-		//Comparable<E> comparable = (Comparable<E>) currentNode.getNodeData();
-		
-		
-		//(comparable.compareTo(element)) < 0  was being used
 		while (currentNode.getNext() != null && (sortStrategy.compare(currentNode.getNodeData(), element)) < 0) {
 			currentNode = currentNode.getNext();
 		}
@@ -118,36 +109,6 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 		}
 	}
 
-	//Print RedIds of students with GPA < 2.85
-	//	public void printProbationRedIds() {
-	//		if(head != null) {
-	//			Node currentStudent = head;
-	//			System.out.println("\nProbation List:");
-	//			while (currentStudent != null) {
-	//				if(currentStudent.getNodeData().getGpa() < 2.85) {
-	//					System.out.println(currentStudent.getNodeData().getRedId());
-	//					currentStudent = currentStudent.getNext();
-	//				} else
-	//					currentStudent = currentStudent.getNext();
-	//			}
-	//		}
-	//	}
-
-	//Print name of students with GPA = 4.0
-	//	public void printHonorNames() {
-	//		if(head != null) {
-	//			Node currentStudent = tail;
-	//			System.out.println("\nHonor List:");
-	//			while(currentStudent != null) {
-	//				if(currentStudent.getNodeData().getGpa() == 4.0) {
-	//					System.out.println(currentStudent.getNodeData().getName());
-	//					currentStudent = currentStudent.getPrevious();
-	//				} else
-	//					currentStudent = currentStudent.getPrevious();
-	//			}
-	//		}
-	//	}
-
 	public void getAll() {
 		if(size == 0) {
 			return;
@@ -164,7 +125,7 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 
 	@Override
 	public Iterator<E> iterator() {
-		return new DoublyLinkedListIterator();
+		return new DoublyLinkedListIterator<E>(head);
 	}
 
 	@Override
@@ -183,35 +144,6 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 	public String toString() {
 		// TODO Auto-generated method stub
 		return super.toString();
-	}
-
-	private class DoublyLinkedListIterator implements Iterator<E> {
-
-		private Node<E> current;
-
-		private DoublyLinkedListIterator() {
-			current = head;
-		}
-
-		@Override
-		public boolean hasNext() {
-			return (current != null);
-		}
-
-		@Override
-		public E next() {
-			if(hasNext()) {
-				E result = current.getNodeData();
-				current = current.getNext();
-				return result;
-			}
-			throw new NoSuchElementException();
-		}
-
-		@Override
-		public void remove() {
-			throw new UnsupportedOperationException("This operation is currently not supported.");
-		}
 	}
 
 	@Override

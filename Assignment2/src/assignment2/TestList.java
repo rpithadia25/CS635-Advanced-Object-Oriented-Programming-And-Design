@@ -6,9 +6,9 @@ public class TestList {
 
 	public static <E> void main(String[] args) throws IndexOutOfBoundsException {
 		
-//		DoublyLinkedList<Student> list = new DoublyLinkedList<Student>(new SortByName());
+		DoublyLinkedList<Student> list = new DoublyLinkedList<Student>(new SortByName());
 //		DoublyLinkedList<Student> list = new DoublyLinkedList<Student>(new SortByRedId());
-		DoublyLinkedList<Student> list = new DoublyLinkedList<Student>(new SortByGpa());
+//		DoublyLinkedList<Student> list = new DoublyLinkedList<Student>(new SortByGpa());
 		
 		Student drake =  new Student();
 		drake.setGpa(4.00);
@@ -39,10 +39,6 @@ public class TestList {
 		Iterator<Student> itr = list.iterator();
 		while(itr.hasNext())
 			System.out.println(itr.next() + " ");
-		
-//		list.printKthStudent(2);
-//		list.printAllStudents();
-//		list.printHonorNames();
-//		list.printProbationRedIds();
+
 	}
 }
