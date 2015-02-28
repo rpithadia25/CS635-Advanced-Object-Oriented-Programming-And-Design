@@ -1,6 +1,7 @@
 package assignment2;
 
 import java.util.AbstractSequentialList;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ListIterator;
 
@@ -57,7 +58,6 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 		
 		//Input is greater than all the elements
 		if(currentNode.getNext() == null && (sortStrategy.compareWith(currentNode.getNodeData(), element)) < 0) {
-			
 			insertLast(dataNode);
 			return true;
 		}
@@ -67,6 +67,7 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 		dataNode.setPrevious(currentNode.getPrevious());
 		currentNode.getPrevious().setNext(dataNode);
 		currentNode.setPrevious(dataNode);
+		size++;
 		return true;
 	}
 	
@@ -76,7 +77,8 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 		else
 			head.setPrevious(element);   
 		element.setNext(head);        
-		head = element;               
+		head = element;           
+		size++;
 	}
 
 	private void insertLast(Node<E> element) {
@@ -86,7 +88,8 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 			tail.setNext(element);     
 			element.setPrevious(tail); 
 		}
-		tail = element;             
+		tail = element;
+		size++;
 	}
 
 	public void printKthStudent(int k) throws IndexOutOfBoundsException {
@@ -126,8 +129,16 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 
 	@Override
 	public Object[] toArray() {
-		// TODO Auto-generated method stub
-		return super.toArray();
+		ArrayList<E> listArrayList = new ArrayList<E>();
+		
+		Iterator<E> listIterator = iterator();
+		while(listIterator.hasNext()){
+			listArrayList.add(listIterator.next());
+		}
+		
+		Object [] listArray = new Object[listArrayList.size()];
+		
+		return listArrayList.toArray(listArray);
 	}
 
 	@Override
@@ -138,8 +149,14 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
+		ArrayList<E> arrayList = new ArrayList<E>();
+		
+		Iterator<E> listIterator = iterator();
+		while(listIterator.hasNext()){
+			arrayList.add(listIterator.next());
+		}
+		
+		return arrayList.toString();
 	}
 
 	@Override
@@ -150,8 +167,7 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return size;
 	}
 
 	@Override
