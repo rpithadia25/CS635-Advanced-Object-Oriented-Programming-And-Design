@@ -2,19 +2,27 @@ package assignment2;
 
 public class Node<E> {
 
-	private Node next;
-	private Node previous;
+	private Node<E> next;
+	private Node<E> previous;
 	private E nodeData;
 	
 	//Constructor
 	public Node() {
-		previous = null;
-		next = null;
+		
 	}
 	
 	public Node(E data) {
-		this();
+		next = Node.newNull();
+		previous = Node.newNull();
 		this.nodeData = data;
+	}
+	
+	public boolean isNull() {
+		return false;
+	}
+	
+	public static Node newNull() {
+		return new NullNode();
 	}
 
 	public Node getPrevious() {

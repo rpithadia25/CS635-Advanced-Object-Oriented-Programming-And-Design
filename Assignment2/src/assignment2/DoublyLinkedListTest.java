@@ -22,6 +22,7 @@ public class DoublyLinkedListTest {
 	
 	@Before
 	public void setUp() throws Exception {
+		
 		sortByNameList = new DoublyLinkedList(new SortByName());
 		sortByGpaList = new DoublyLinkedList(new SortByGpa());
 		sortByRedIdList = new DoublyLinkedList(new SortByRedId());
@@ -63,8 +64,9 @@ public class DoublyLinkedListTest {
 	public void testSize() {
 		sortByNameList.add(drake);
 		sortByNameList.add(floyd);
-		
 		assertEquals(2, sortByNameList.size());
+		sortByNameList.add(ellen);
+		assertEquals(3, sortByNameList.size());
 	}
 
 	@Test
@@ -116,5 +118,4 @@ public class DoublyLinkedListTest {
 		Object [] expectedListArray = {andrew, drake};
 		assertArrayEquals(expectedListArray, actualListArray);
 	}
-
 }
