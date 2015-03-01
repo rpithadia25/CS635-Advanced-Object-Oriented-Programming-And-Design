@@ -6,6 +6,12 @@ public class Student {
 	private String redId;
 	private double gpa;
 	
+	public Student(String name, String redId, double gpa) {
+		this.name = name;
+		this.redId = redId;
+		this.gpa = gpa;
+	}
+	
 	public String getName() {
 		return name;
 	}

@@ -4,7 +4,7 @@ public class Node<E> {
 
 	private Node<E> next;
 	private Node<E> previous;
-	private E nodeData;
+	private E data;
 	
 	//Constructor
 	public Node() {
@@ -14,7 +14,7 @@ public class Node<E> {
 	public Node(E data) {
 		next = Node.newNull();
 		previous = Node.newNull();
-		this.nodeData = data;
+		this.data = data;
 	}
 	
 	public boolean isNull() {
@@ -41,19 +41,24 @@ public class Node<E> {
 		this.next = next;
 	}
 
-	public E getNodeData() {
-		return nodeData;
+	public E getData() {
+		return data;
 	}
 
 	public void setNodeData(E data) {
-		this.nodeData = data;
+		this.data = data;
 	}
 
 	public String toString() {
-		if(nodeData == null)
+		if(data == null)
 			return null;
 		else
-			return nodeData.toString();
+			return data.toString();
 	}
+	
+//	public int size() {
+//		int size = next.size();
+//		return (size + 1);
+//	}
 
 }	

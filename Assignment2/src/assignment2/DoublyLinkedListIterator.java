@@ -13,13 +13,13 @@ public class DoublyLinkedListIterator<E> implements Iterator<E>{
 	
 			@Override
 			public boolean hasNext() {
-				return (current != null);
+				return (!current.isNull());
 			}
 	
 			@Override
 			public E next() {
 				if(hasNext()) {
-					E result = current.getNodeData();
+					E result = current.getData();
 					current = current.getNext();
 					return result;
 				}
