@@ -127,7 +127,7 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 		ArrayList<E> listArrayList = new ArrayList<E>();
 		
 		Iterator<E> listIterator = iterator();
-		while(listIterator.hasNext()){
+		while(listIterator.hasNext()) {
 			listArrayList.add(listIterator.next());
 		}
 		
@@ -143,14 +143,14 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 
 	@Override
 	public String toString() {
-		ArrayList<E> arrayList = new ArrayList<E>();
+		ArrayList<E> doublyLinkedListArray = new ArrayList<E>();
 		
 		Iterator<E> listIterator = iterator();
 		while(listIterator.hasNext()){
-			arrayList.add(listIterator.next());
+			doublyLinkedListArray.add(listIterator.next());
 		}
 		
-		return arrayList.toString();
+		return doublyLinkedListArray.toString();
 	}
 
 	//TODO
@@ -172,7 +172,7 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 	}
 
 	@Override
-	public ListIterator<E> listIterator(int arg0) {
+	public ListIterator<E> listIterator(int index) {
 		// TODO Auto-generated method stub
 		return null;
 	}

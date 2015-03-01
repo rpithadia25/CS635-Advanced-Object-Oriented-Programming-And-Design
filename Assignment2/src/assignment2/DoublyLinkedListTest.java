@@ -19,14 +19,14 @@ public class DoublyLinkedListTest {
 	Student ellen;
 	Student andrew;
 	Student garfield;
-	
+
 	@Before
 	public void setUp() throws Exception {
-		
+
 		sortByNameList = new DoublyLinkedList(new SortByName());
 		sortByGpaList = new DoublyLinkedList(new SortByGpa());
 		sortByRedIdList = new DoublyLinkedList(new SortByRedId());
-		
+
 		drake =  new Student("Drake", "817000002", 4.00);
 		floyd = new Student("Floyd", "817000001", 2.7);
 		ellen = new Student("Ellen", "817123456", 3.5);
@@ -60,17 +60,17 @@ public class DoublyLinkedListTest {
 		assertTrue(sortByGpaList.add(andrew));
 		assertTrue(sortByRedIdList.add(garfield));
 	}
-	
+
 	@Test(expected = NullPointerException.class)
 	public void testAddNull() {
 		sortByNameList.add(null);
 	}
-	
+
 	@Test
 	public void testToString() {
 		sortByNameList.add(floyd);
 		sortByNameList.add(ellen);
-		
+
 		String actualListString = sortByNameList.toString();
 		String expectedListString = "[Ellen, Floyd]";
 		assertEquals(expectedListString, actualListString);
@@ -81,7 +81,7 @@ public class DoublyLinkedListTest {
 		sortByRedIdList.add(drake);
 		sortByRedIdList.add(ellen);
 		sortByRedIdList.add(andrew);
-		
+
 		Iterator<Student> sortByRedIdIterator = sortByRedIdList.iterator();
 		Iterator<Student> sortByNameIterator = sortByNameList.iterator(); //Iterator for Empty List
 		assertTrue(sortByRedIdIterator.hasNext());
@@ -94,7 +94,7 @@ public class DoublyLinkedListTest {
 	public void testToArray() {
 		sortByNameList.add(drake);
 		sortByNameList.add(andrew);
-		
+
 		Object [] actualListArray = sortByNameList.toArray();
 		Object [] expectedListArray = {andrew, drake};
 		assertArrayEquals(expectedListArray, actualListArray);
