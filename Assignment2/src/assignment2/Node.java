@@ -17,12 +17,12 @@ public class Node<E> {
 		this.data = data;
 	}
 
-	public boolean isNull() {
-		return false;
-	}
-
 	public static Node newNull() {
 		return new NullNode();
+	}
+	
+	public boolean isNull() {
+		return false;
 	}
 
 	public Node getPrevious() {
@@ -30,7 +30,10 @@ public class Node<E> {
 	}
 
 	public void setPrevious(Node previous) {
-		this.previous = previous;
+		if(previous != null)
+			this.previous = previous;
+		else
+			throw new IllegalArgumentException();
 	}
 
 	public Node getNext() {
@@ -38,7 +41,10 @@ public class Node<E> {
 	}
 
 	public void setNext(Node next) {
-		this.next = next;
+		if(next != null)
+			this.next = next;
+		else
+			throw new IllegalArgumentException();
 	}
 
 	public E getData() {
@@ -46,7 +52,10 @@ public class Node<E> {
 	}
 
 	public void setNodeData(E data) {
-		this.data = data;
+		if(data != null)
+			this.data = data;
+		else
+			throw new IllegalArgumentException();
 	}
 
 	public String toString() {
@@ -55,10 +64,5 @@ public class Node<E> {
 		else
 			return data.toString();
 	}
-
-	//	public int size() {
-	//		int size = next.size();
-	//		return (size + 1);
-	//	}
 
 }	

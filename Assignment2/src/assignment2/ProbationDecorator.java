@@ -1,9 +1,19 @@
 package assignment2;
 
+import java.util.AbstractSequentialList;
 import java.util.Iterator;
 
-public abstract class ProbationDecorator<E> {
-	protected DoublyLinkedList<Student> decoratedList;
+public abstract class ProbationDecorator<E> extends AbstractSequentialList<E> {
+
+	protected AbstractSequentialList<Student> decoratedList;
+	
+	public ProbationDecorator() {
+		
+	}
+	
+	public ProbationDecorator(AbstractSequentialList list) {
+		decoratedList = list;
+	}
 	
 	public boolean add (Student student) {
 		return decoratedList.add(student);

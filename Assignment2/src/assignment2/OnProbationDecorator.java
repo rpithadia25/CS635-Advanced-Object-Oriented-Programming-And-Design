@@ -1,12 +1,20 @@
 package assignment2;
 
+import java.util.AbstractSequentialList;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.ListIterator;
 
 public class OnProbationDecorator<E> extends ProbationDecorator<E> {
 
-	public OnProbationDecorator(DoublyLinkedList<Student> doublyLinkedList) {
+	public OnProbationDecorator(AbstractSequentialList doublyLinkedList) {
 		this.decoratedList = doublyLinkedList;
+	}
+	
+	@Override
+	public boolean add(Student student) {
+		// TODO Auto-generated method stub
+		return super.add(student);
 	}
 
 	@Override
@@ -17,7 +25,7 @@ public class OnProbationDecorator<E> extends ProbationDecorator<E> {
 		while(listIterator.hasNext()) {
 			doublyLinkedListArray.add(listIterator.next());
 		}
-
+		
 		return doublyLinkedListArray.toString();
 	}
 
@@ -39,5 +47,10 @@ public class OnProbationDecorator<E> extends ProbationDecorator<E> {
 		return doublyLinkedListArray.toArray(listArray);
 	}
 
+	@Override
+	public ListIterator<E> listIterator(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

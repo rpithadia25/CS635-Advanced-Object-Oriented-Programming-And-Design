@@ -3,8 +3,9 @@ package assignment2;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class OnProbationFilter<E> implements Iterator<Student>{
+public class OnProbationFilter<E> implements Iterator<Student> {
 
+	public static final double PROBATION_THRESHOLD = 2.85;
 	private Iterator<Student> probationIterator;
 	private Student current;
 	private boolean usedFlag;
@@ -16,9 +17,9 @@ public class OnProbationFilter<E> implements Iterator<Student>{
 	
 	@Override
 	public boolean hasNext() {
-		while(probationIterator.hasNext()){
+		while(probationIterator.hasNext()) {
 			current = probationIterator.next();
-			if(current.getGpa() < 2.85) {
+			if(current.getGpa() < PROBATION_THRESHOLD) {
 				usedFlag = false;
 				return true;
 			}
@@ -41,8 +42,6 @@ public class OnProbationFilter<E> implements Iterator<Student>{
 
 	@Override
 	public void remove() {
-		// TODO Auto-generated method stub
-		
+		throw new UnsupportedOperationException("This operation is currently not supported.");
 	}
-
 }

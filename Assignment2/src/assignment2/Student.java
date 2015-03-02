@@ -16,13 +16,19 @@ public class Student {
 		return name;
 	}
 	public void setName(String name) {
-		this.name = name;
+		if(name != null)
+			this.name = name;
+		else
+			throw new IllegalArgumentException();
 	}
 	public String getRedId() {
-		return redId;
+			return redId;
 	}
 	public void setRedId(String redId) {
-		this.redId = redId;
+		if(redId != null)
+			this.redId = redId;
+		else
+			throw new IllegalArgumentException();
 	}
 	public double getGpa() {
 		return gpa;
@@ -33,7 +39,7 @@ public class Student {
 	
 	@Override
 	public String toString() {
-		return name.toString();
+		return "Name: " + name.toString() + ", RedId: " + redId.toString() + ", GPA: " + gpa;
 	}
 
 }

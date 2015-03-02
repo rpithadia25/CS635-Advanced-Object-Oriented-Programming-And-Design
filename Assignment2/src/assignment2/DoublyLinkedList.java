@@ -4,6 +4,7 @@ import java.util.AbstractSequentialList;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ListIterator;
+import java.util.NoSuchElementException;
 
 public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 
@@ -87,36 +88,6 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 		size++;
 	}
 
-	public void printKthStudent(int k) throws IndexOutOfBoundsException {
-		if(head != null) {
-			Node<E> currentNode = head;
-			int i = 0;
-			while(currentNode != null && i < k) {
-				currentNode = currentNode.getNext();
-				i++;
-			}
-			
-			if(currentNode == null)
-				throw new IndexOutOfBoundsException("k is out of bounds.");
-			else
-				System.out.print("The k'th student is: "+currentNode.getData().toString()+"\n");
-		}
-	}
-
-	public void getAll() {
-		if(size == 0) {
-			return;
-		}
-		System.out.println("\nList of all students in lexicographical order:");
-		if(head.getNext() == null)
-			System.out.println(head.getData().toString());
-		Node<E> current = head;
-		while(current != null) {
-			System.out.println(current.getData().toString());
-			current = current.getNext();
-		}
-	}
-
 	@Override
 	public Iterator<E> iterator() {
 		return new DoublyLinkedListIterator<E>(head);
@@ -124,15 +95,7 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 
 	@Override
 	public Object[] toArray() {
-		ArrayList<E> listArrayList = new ArrayList<E>();
-		
-		Iterator<E> listIterator = iterator();
-		while(listIterator.hasNext()) {
-			listArrayList.add(listIterator.next());
-		}
-		
-		Object [] listArray = new Object[listArrayList.size()];
-		return listArrayList.toArray(listArray);
+		return super.toArray();
 	}
 
 	@Override
@@ -143,28 +106,25 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 
 	@Override
 	public String toString() {
-		ArrayList<E> doublyLinkedListArray = new ArrayList<E>();
-		
-		Iterator<E> listIterator = iterator();
-		while(listIterator.hasNext()){
-			doublyLinkedListArray.add(listIterator.next());
-		}
-		
-		return doublyLinkedListArray.toString();
+		return super.toString();
 	}
 
 	//TODO
-//	@Override
-//	public E get(int k) {
-//		if(head != null) {
-//			ArrayList<Object> arrayList = new ArrayList<Object>();
-//			arrayList = this.toArray();
-//			if(currentNode.isNull())
-//				throw new IndexOutOfBoundsException("k is out of bounds.");
-//			else
-//				return currentNode.getData();
-//		}
-//	}
+	@Override
+	public E get(int k) {
+		Node<E> currentNode = head;
+		if(head != null) {
+			int i = 0;
+			while(!currentNode.isNull() && i < k) {
+				currentNode = currentNode.getNext();
+				i++;
+			}
+			
+			if(currentNode.isNull())
+				throw new IndexOutOfBoundsException("k is out of bounds.");
+		}
+		return currentNode.getData();
+	}
 
 	@Override
 	public int size() {

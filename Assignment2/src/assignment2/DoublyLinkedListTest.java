@@ -72,7 +72,7 @@ public class DoublyLinkedListTest {
 		sortByNameList.add(ellen);
 
 		String actualListString = sortByNameList.toString();
-		String expectedListString = "[Ellen, Floyd]";
+		String expectedListString = "[Name: Ellen, RedId: 817123456, GPA: 3.5, Name: Floyd, RedId: 817000001, GPA: 2.7]";
 		assertEquals(expectedListString, actualListString);
 	}
 
