@@ -16,15 +16,15 @@ public class OnProbationDecoratorTest {
 	Student ellen;
 	Student andrew;
 	Student garfield;
-	
+
 	@Before
 	public void setUp() throws Exception {
-		drake =  new Student("Drake", "817000002", 4.00);
+		drake = new Student("Drake", "817000002", 4.00);
 		floyd = new Student("Floyd", "817000001", 2.7);
 		ellen = new Student("Ellen", "817123456", 3.5);
 		andrew = new Student("Andrew", "817123457", 2.5);
 		garfield = new Student("Garfield", "817123500", 4.0);
-		
+
 		list = new DoublyLinkedList<Student>(new SortByName());
 		list.add(andrew);
 		list.add(drake);
@@ -48,7 +48,7 @@ public class OnProbationDecoratorTest {
 	@Test
 	public void testToArray() {
 		list = new OnProbationDecorator(list);
-		Object [] expectedArray = {andrew, floyd};
+		Object[] expectedArray = { andrew, floyd };
 		assertArrayEquals(expectedArray, list.toArray());
 	}
 

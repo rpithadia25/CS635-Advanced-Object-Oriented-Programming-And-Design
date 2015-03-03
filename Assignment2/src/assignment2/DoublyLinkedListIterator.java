@@ -3,7 +3,7 @@ package assignment2;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class DoublyLinkedListIterator<E> implements Iterator<E>{
+public class DoublyLinkedListIterator<E> implements Iterator<E> {
 
 	private Node<E> current;
 
@@ -18,7 +18,7 @@ public class DoublyLinkedListIterator<E> implements Iterator<E>{
 
 	@Override
 	public E next() {
-		if(hasNext()) {
+		if (hasNext()) {
 			E result = current.getData();
 			current = current.getNext();
 			return result;
@@ -28,7 +28,8 @@ public class DoublyLinkedListIterator<E> implements Iterator<E>{
 
 	@Override
 	public void remove() {
-		throw new UnsupportedOperationException("This operation is currently not supported.");
+		throw new UnsupportedOperationException(
+				"This operation is currently not supported.");
 	}
 
 }

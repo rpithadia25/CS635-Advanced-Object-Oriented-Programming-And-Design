@@ -19,7 +19,7 @@ public class Node<E> {
 	public static Node newNull() {
 		return new NullNode();
 	}
-	
+
 	public boolean isNull() {
 		return false;
 	}
@@ -29,7 +29,7 @@ public class Node<E> {
 	}
 
 	public void setPrevious(Node previous) {
-		if(previous != null)
+		if (previous != null)
 			this.previous = previous;
 		else
 			throw new IllegalArgumentException();
@@ -40,7 +40,7 @@ public class Node<E> {
 	}
 
 	public void setNext(Node next) {
-		if(next != null)
+		if (next != null)
 			this.next = next;
 		else
 			throw new IllegalArgumentException();
@@ -51,17 +51,17 @@ public class Node<E> {
 	}
 
 	public void setNodeData(E data) {
-		if(data != null)
+		if (data != null)
 			this.data = data;
 		else
 			throw new IllegalArgumentException();
 	}
 
 	public String toString() {
-		if(data == null)
+		if (data == null)
 			return null;
 		else
 			return data.toString();
 	}
 
-}	
+}

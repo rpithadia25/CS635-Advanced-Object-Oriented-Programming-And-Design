@@ -6,9 +6,9 @@ import java.util.ListIterator;
 
 public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 
-	private Node<E> 		head;
-	private Node<E> 		tail;
-	public 	int 			size;
+	private Node<E> head;
+	private Node<E> tail;
+	public int size;
 	private SortStrategy<E> sortStrategy;
 
 	public DoublyLinkedList(SortStrategy<E> algorithm) {
@@ -20,53 +20,56 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 	public boolean isEmpty() {
 		return head.isNull();
 	}
-	
+
 	@Override
 	public int size() {
 		return size;
 	}
-	
+
 	@Override
 	public Iterator<E> iterator() {
 		return new DoublyLinkedListIterator<E>(head);
 	}
 
-	//Add element
+	// Add element
 	@Override
 	public boolean add(E element) {
-		
-		//Null values should not be allowed
-		if(element == null) {
+
+		// Null values should not be allowed
+		if (element == null) {
 			throw new NullPointerException();
 		}
 
-		if(head.isNull()) {
+		if (head.isNull()) {
 			head = new Node<E>(element);
 			tail = head;
 			size++;
 			return true;
 		}
-		
+
 		Node<E> dataNode = new Node<E>(element);
 		Node<E> currentNode = head;
 
-		while (!currentNode.getNext().isNull() && (sortStrategy.compareWith(currentNode.getData(), element)) < 0) {
+		while (!currentNode.getNext().isNull()
+				&& (sortStrategy.compareWith(currentNode.getData(), element)) < 0) {
 			currentNode = currentNode.getNext();
 		}
 
-		//Input is less than all the elements
-		if(currentNode == head  && (sortStrategy.compareWith(currentNode.getData(), element)) > 0) {
+		// Input is less than all the elements
+		if (currentNode == head
+				&& (sortStrategy.compareWith(currentNode.getData(), element)) > 0) {
 			insertFirst(dataNode);
 			return true;
 		}
 
-		//Input is greater than all the elements
-		if(currentNode.getNext().isNull() && (sortStrategy.compareWith(currentNode.getData(), element)) < 0) {
+		// Input is greater than all the elements
+		if (currentNode.getNext().isNull()
+				&& (sortStrategy.compareWith(currentNode.getData(), element)) < 0) {
 			insertLast(dataNode);
 			return true;
 		}
 
-		//Insert in between
+		// Insert in between
 		dataNode.setNext(currentNode);
 		dataNode.setPrevious(currentNode.getPrevious());
 		currentNode.getPrevious().setNext(dataNode);
@@ -74,39 +77,39 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 		size++;
 		return true;
 	}
-	
+
 	private void insertFirst(Node<E> element) {
-		if( isEmpty() )                
-			tail = element;            
+		if (isEmpty())
+			tail = element;
 		else
-			head.setPrevious(element);   
-		element.setNext(head);        
-		head = element;           
+			head.setPrevious(element);
+		element.setNext(head);
+		head = element;
 		size++;
 	}
 
 	private void insertLast(Node<E> element) {
-		if( isEmpty() )                
-			head = element;         
+		if (isEmpty())
+			head = element;
 		else {
-			tail.setNext(element);     
-			element.setPrevious(tail); 
+			tail.setNext(element);
+			element.setPrevious(tail);
 		}
 		tail = element;
 		size++;
 	}
-	
+
 	@Override
 	public E get(int k) {
 		Node<E> currentNode = head;
-		if(head != null) {
+		if (head != null) {
 			int i = 0;
-			while(!currentNode.isNull() && i < k) {
+			while (!currentNode.isNull() && i < k) {
 				currentNode = currentNode.getNext();
 				i++;
 			}
-			
-			if(currentNode.isNull())
+
+			if (currentNode.isNull())
 				throw new IndexOutOfBoundsException("k is out of bounds.");
 		}
 		return currentNode.getData();

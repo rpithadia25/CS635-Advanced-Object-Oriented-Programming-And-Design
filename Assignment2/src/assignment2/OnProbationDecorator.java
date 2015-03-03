@@ -10,16 +10,16 @@ public class OnProbationDecorator<E> extends ProbationDecorator<E> {
 	public OnProbationDecorator(AbstractSequentialList doublyLinkedList) {
 		this.decoratedList = doublyLinkedList;
 	}
-	
+
 	@Override
 	public String toString() {
 		ArrayList<E> doublyLinkedListArray = new ArrayList<E>();
-		
+
 		Iterator<E> listIterator = iterator();
-		while(listIterator.hasNext()) {
+		while (listIterator.hasNext()) {
 			doublyLinkedListArray.add(listIterator.next());
 		}
-		
+
 		return doublyLinkedListArray.toString();
 	}
 
@@ -31,13 +31,13 @@ public class OnProbationDecorator<E> extends ProbationDecorator<E> {
 	@Override
 	public Object[] toArray() {
 		ArrayList<E> doublyLinkedListArray = new ArrayList<E>();
-		
+
 		Iterator<E> listIterator = iterator();
-		while(listIterator.hasNext()) {
+		while (listIterator.hasNext()) {
 			doublyLinkedListArray.add(listIterator.next());
 		}
-		
-		Object [] listArray = new Object[doublyLinkedListArray.size()];
+
+		Object[] listArray = new Object[doublyLinkedListArray.size()];
 		return doublyLinkedListArray.toArray(listArray);
 	}
 

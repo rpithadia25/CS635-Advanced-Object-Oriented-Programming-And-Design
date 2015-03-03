@@ -9,17 +9,17 @@ public class OnProbationFilter<E> implements Iterator<Student> {
 	private Iterator<Student> probationIterator;
 	private Student current;
 	private boolean usedFlag;
-	
-	public OnProbationFilter (Iterator<Student> input) {
+
+	public OnProbationFilter(Iterator<Student> input) {
 		probationIterator = input;
 		usedFlag = true;
 	}
-	
+
 	@Override
 	public boolean hasNext() {
-		while(probationIterator.hasNext()) {
+		while (probationIterator.hasNext()) {
 			current = probationIterator.next();
-			if(current.getGpa() < PROBATION_THRESHOLD) {
+			if (current.getGpa() < PROBATION_THRESHOLD) {
 				usedFlag = false;
 				return true;
 			}
@@ -29,7 +29,7 @@ public class OnProbationFilter<E> implements Iterator<Student> {
 
 	@Override
 	public Student next() {
-		if(!usedFlag) {
+		if (!usedFlag) {
 			usedFlag = true;
 			return current;
 		} else if (hasNext()) {
@@ -42,6 +42,7 @@ public class OnProbationFilter<E> implements Iterator<Student> {
 
 	@Override
 	public void remove() {
-		throw new UnsupportedOperationException("This operation is currently not supported.");
+		throw new UnsupportedOperationException(
+				"This operation is currently not supported.");
 	}
 }

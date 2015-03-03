@@ -21,10 +21,10 @@ public class OnProbationFilterTest {
 	@Before
 	public void setUp() throws Exception {
 		list = new DoublyLinkedList(new SortByGpa());
-		drake =  new Student("Drake", "817000002", 4.00);
-		floyd = new Student("Floyd", "817000001", 2.7); //On Probation
+		drake = new Student("Drake", "817000002", 4.00);
+		floyd = new Student("Floyd", "817000001", 2.7); // On Probation
 		ellen = new Student("Ellen", "817123456", 3.5);
-		andrew = new Student("Andrew", "817123457", 2.5); //On Probation
+		andrew = new Student("Andrew", "817123457", 2.5); // On Probation
 		garfield = new Student("Garfield", "817123500", 4.0);
 	}
 
@@ -41,14 +41,14 @@ public class OnProbationFilterTest {
 		list.add(andrew);
 		list.add(garfield);
 		Iterator<Student> iterator = new OnProbationFilter(list.iterator());
-		assertEquals(andrew, iterator.next()); //Gpa: 2.5
-		assertEquals(floyd, iterator.next()); //Gpa: 2.7
+		assertEquals(andrew, iterator.next()); // Gpa: 2.5
+		assertEquals(floyd, iterator.next()); // Gpa: 2.7
 	}
 
 	@Test
 	public void testHasNext() {
-		list.add(garfield); //Not on probation
-		list.add(ellen); //Not on probation
+		list.add(garfield); // Not on probation
+		list.add(ellen); // Not on probation
 		Iterator<Student> iterator = new OnProbationFilter(list.iterator());
 		assertEquals(false, iterator.hasNext());
 	}

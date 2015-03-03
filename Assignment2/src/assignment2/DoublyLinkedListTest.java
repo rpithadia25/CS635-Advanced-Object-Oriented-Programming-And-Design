@@ -27,7 +27,7 @@ public class DoublyLinkedListTest {
 		sortByGpaList = new DoublyLinkedList(new SortByGpa());
 		sortByRedIdList = new DoublyLinkedList(new SortByRedId());
 
-		drake =  new Student("Drake", "817000002", 4.00);
+		drake = new Student("Drake", "817000002", 4.00);
 		floyd = new Student("Floyd", "817000001", 2.7);
 		ellen = new Student("Ellen", "817123456", 3.5);
 		andrew = new Student("Andrew", "817123457", 2.5);
@@ -83,13 +83,13 @@ public class DoublyLinkedListTest {
 		sortByRedIdList.add(andrew);
 
 		Iterator<Student> sortByRedIdIterator = sortByRedIdList.iterator();
-		Iterator<Student> sortByNameIterator = sortByNameList.iterator(); //Iterator for Empty List
+		Iterator<Student> sortByNameIterator = sortByNameList.iterator(); // Iterator for Empty List
 		assertTrue(sortByRedIdIterator.hasNext());
 		assertEquals(drake, sortByRedIdIterator.next());
 		assertFalse(sortByNameIterator.hasNext());
 		sortByNameIterator.next();
 	}
-	
+
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testGet() {
 		sortByNameList.add(drake);
@@ -101,8 +101,8 @@ public class DoublyLinkedListTest {
 		sortByNameList.add(drake);
 		sortByNameList.add(andrew);
 
-		Object [] actualListArray = sortByNameList.toArray();
-		Object [] expectedListArray = {andrew, drake};
+		Object[] actualListArray = sortByNameList.toArray();
+		Object[] expectedListArray = { andrew, drake };
 		assertArrayEquals(expectedListArray, actualListArray);
 	}
 }
