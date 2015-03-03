@@ -1,6 +1,7 @@
 package assignment2;
 
 import java.util.AbstractSequentialList;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -9,9 +10,10 @@ public class TestList {
 	public static <E> void main(String[] args) throws IndexOutOfBoundsException {
 		
 		AbstractSequentialList<Student> list = new DoublyLinkedList<Student>(new SortByName());
-//		DoublyLinkedList<Student> list = new DoublyLinkedList<Student>(new SortByRedId());
+		//DoublyLinkedList<Student> list = new DoublyLinkedList<Student>(new SortByRedId());
 //		DoublyLinkedList<Student> list = new DoublyLinkedList<Student>(new SortByGpa());
 		
+			
 		Student drake =  new Student("Drake", "817000002", 4.00);
 		Student floyd = new Student("Floyd", "817000001", 2.7);
 		Student ellen = new Student("Ellen", "817123456", 3.5);
@@ -31,7 +33,7 @@ public class TestList {
 //		decorator.add(ellen);
 //		decorator.add(andrew);
 //		decorator.add(garfield);
-		System.out.println(list.toString());
+		Object[] array = list.toArray();
 //		System.out.println(list.get(0));
 		//System.out.println(list.toString());
 		

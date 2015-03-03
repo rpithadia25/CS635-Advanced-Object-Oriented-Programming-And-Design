@@ -1,10 +1,8 @@
 package assignment2;
 
 import java.util.AbstractSequentialList;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ListIterator;
-import java.util.NoSuchElementException;
 
 public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 
@@ -21,6 +19,16 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 
 	public boolean isEmpty() {
 		return head.isNull();
+	}
+	
+	@Override
+	public int size() {
+		return size;
+	}
+	
+	@Override
+	public Iterator<E> iterator() {
+		return new DoublyLinkedListIterator<E>(head);
 	}
 
 	//Add element
@@ -87,29 +95,7 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 		tail = element;
 		size++;
 	}
-
-	@Override
-	public Iterator<E> iterator() {
-		return new DoublyLinkedListIterator<E>(head);
-	}
-
-	@Override
-	public Object[] toArray() {
-		return super.toArray();
-	}
-
-	@Override
-	public <T> T[] toArray(T[] a) {
-		// TODO Auto-generated method stub
-		return super.toArray(a);
-	}
-
-	@Override
-	public String toString() {
-		return super.toString();
-	}
-
-	//TODO
+	
 	@Override
 	public E get(int k) {
 		Node<E> currentNode = head;
@@ -127,13 +113,22 @@ public class DoublyLinkedList<E> extends AbstractSequentialList<E> {
 	}
 
 	@Override
-	public int size() {
-		return size;
+	public Object[] toArray() {
+		return super.toArray();
+	}
+
+	@Override
+	public <T> T[] toArray(T[] a) {
+		return super.toArray(a);
+	}
+
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 
 	@Override
 	public ListIterator<E> listIterator(int index) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

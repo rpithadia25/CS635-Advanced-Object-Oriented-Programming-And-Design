@@ -6,7 +6,6 @@ public class Node<E> {
 	private Node<E> previous;
 	private E data;
 
-	//Constructor
 	public Node() {
 
 	}

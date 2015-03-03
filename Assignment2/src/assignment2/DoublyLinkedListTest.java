@@ -56,7 +56,7 @@ public class DoublyLinkedListTest {
 	}
 
 	@Test
-	public void testAddE() {
+	public void testAdd() {
 		assertTrue(sortByGpaList.add(andrew));
 		assertTrue(sortByRedIdList.add(garfield));
 	}
@@ -88,6 +88,12 @@ public class DoublyLinkedListTest {
 		assertEquals(drake, sortByRedIdIterator.next());
 		assertFalse(sortByNameIterator.hasNext());
 		sortByNameIterator.next();
+	}
+	
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void testGet() {
+		sortByNameList.add(drake);
+		sortByNameList.get(5);
 	}
 
 	@Test

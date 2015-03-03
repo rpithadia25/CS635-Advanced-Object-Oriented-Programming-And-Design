@@ -12,12 +12,6 @@ public class OnProbationDecorator<E> extends ProbationDecorator<E> {
 	}
 	
 	@Override
-	public boolean add(Student student) {
-		// TODO Auto-generated method stub
-		return super.add(student);
-	}
-
-	@Override
 	public String toString() {
 		ArrayList<E> doublyLinkedListArray = new ArrayList<E>();
 		
@@ -49,7 +43,6 @@ public class OnProbationDecorator<E> extends ProbationDecorator<E> {
 
 	@Override
 	public ListIterator<E> listIterator(int index) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
