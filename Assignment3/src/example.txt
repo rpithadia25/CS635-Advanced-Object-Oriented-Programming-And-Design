@@ -1,0 +1,6 @@
+move 10
+turn 90
+repeat 3
+	move 10
+	turn 90
+end
