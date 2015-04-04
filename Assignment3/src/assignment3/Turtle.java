@@ -4,6 +4,7 @@ import java.awt.geom.Point2D;
 
 public class Turtle {
 	
+	//TODO: write access modifiers
 	Point2D currentLocation;
 	int degrees;
 	String input;
@@ -47,12 +48,12 @@ public class Turtle {
 	}
 
 	void move(int distance) {
-		Expression e = new Move(String.valueOf(distance));
+		Command e = new Move(String.valueOf(distance));
 		e.interpret(this);
 	}
 	
 	void turn(int degrees) {
-		Expression e = new Turn(String.valueOf(degrees));
+		Command e = new Turn(String.valueOf(degrees));
 		e.interpret(this);
 	}
 	

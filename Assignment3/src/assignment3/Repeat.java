@@ -1,6 +1,6 @@
 package assignment3;
 
-public class Repeat implements Expression{
+public class Repeat implements Command{
 
 	Turtle turtle;
 	int times;

@@ -1,6 +1,6 @@
 package assignment3;
 
-public class Turn implements Expression{
+public class Turn implements Command{
 
 	Turtle turtle;
 	
