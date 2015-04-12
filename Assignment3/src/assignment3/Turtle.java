@@ -4,12 +4,11 @@ import java.awt.geom.Point2D;
 
 public class Turtle {
 	
-	//TODO: write access modifiers
-	Point2D currentLocation;
-	int degrees;
-	String input;
-	int distance;
-	boolean isPenUp = false;
+	private Point2D currentLocation;
+	private int degrees;
+	private String input;
+	private int distance;
+	private boolean isPenUp = false;
 	
 	public Turtle() {
 		this.currentLocation = new Point2D.Double(0,0);
@@ -48,13 +47,28 @@ public class Turtle {
 	}
 
 	void move(int distance) {
-		Command e = new Move(String.valueOf(distance));
-		e.interpret(this);
+		if(!isPenUp) {
+			double radians = Math.toRadians(this.getDegrees());
+			double deltaX = Math.cos(radians) * distance;
+			double deltaY = Math.sin(radians) * distance;
+			double x = roundToTwoDigits(deltaX + this.getCurrentLocation().getX());
+			double y = roundToTwoDigits(deltaY + this.getCurrentLocation().getY());
+			this.currentLocation.setLocation(x,y);
+			this.setDistance(distance + this.getDistance());
+		} else {
+			throw new UnsupportedOperationException("Turtle cannot draw right now.");
+		}
+		
+	}
+	
+	private double roundToTwoDigits(Double value) {
+		return Math.round(value * 100.0) / 100.0;
 	}
 	
 	void turn(int degrees) {
-		Command e = new Turn(String.valueOf(degrees));
-		e.interpret(this);
+//		Command e = new Turn(String.valueOf(degrees));
+//		e.interpret(this);
+		this.setDegrees(this.getDegrees() + degrees);
 	}
 	
 	void penUp() {

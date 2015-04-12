@@ -2,16 +2,15 @@ package assignment3;
 
 public class Turn implements Command{
 
-	Turtle turtle;
+	int degrees;
 	
-	public Turn(String input) {
-		turtle = new Turtle();
-		turtle.setDegrees(Integer.parseInt(input));
-		turtle.setInput(input);
+	public Turn(int degrees) {
+		this.degrees = degrees;
 	}
 	
 	@Override
 	public void interpret(Turtle context) {
-		context.setDegrees(context.getDegrees() + turtle.getDegrees());
+		context.turn(degrees);
+		//context.setDegrees(context.getDegrees() + turtle.getDegrees());
 	}
 }
