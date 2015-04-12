@@ -1,9 +1,11 @@
 package assignment3;
 
+
 public class Repeat implements Command{
 
+	protected int times;
 	Turtle turtle;
-	int times;
+	InterpretRepeat repeat;
 	
 	public Repeat(int times) {
 		this.times = times;
@@ -11,7 +13,9 @@ public class Repeat implements Command{
 	
 	@Override
 	public void interpret(Turtle context) {
-		turtle.setCurrentLocation(context.getCurrentLocation());
+		
+		repeat.interpret(context);
+		//turtle.setCurrentLocation(context.getCurrentLocation());
 	}
 	
 }

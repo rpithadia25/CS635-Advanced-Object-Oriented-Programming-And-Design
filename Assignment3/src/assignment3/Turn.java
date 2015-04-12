@@ -1,8 +1,10 @@
 package assignment3;
 
+
 public class Turn implements Command{
 
-	int degrees;
+	protected int degrees;
+	InterpretTurn turn;
 	
 	public Turn(int degrees) {
 		this.degrees = degrees;
@@ -10,7 +12,13 @@ public class Turn implements Command{
 	
 	@Override
 	public void interpret(Turtle context) {
-		context.turn(degrees);
+		turn = new InterpretTurn(degrees);
+		turn.interpret(context);
+		//context.turn(degrees);
+		
+		
+		
+		
 		//context.setDegrees(context.getDegrees() + turtle.getDegrees());
 	}
 }

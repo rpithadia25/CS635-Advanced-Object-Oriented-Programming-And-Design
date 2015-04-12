@@ -1,5 +1,6 @@
 package assignment3;
 
+
 public class Variable implements Command {
 
 	int value;
