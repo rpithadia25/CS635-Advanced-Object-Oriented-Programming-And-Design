@@ -5,13 +5,13 @@ import java.awt.geom.Point2D;
 public class Turtle {
 
 	private Point2D currentLocation;
-	private int degrees;
+	private int direction;
 	private String input;
 	private int distance;
-	private boolean isPenUp = false;
+	private boolean isPenUp = false; // Default Condition
 
 	public Turtle() {
-		this.currentLocation = new Point2D.Double(0, 0);
+		this.currentLocation = new Point2D.Double(0, 0); // Default Position
 	}
 
 	public int getDistance() {
@@ -30,12 +30,15 @@ public class Turtle {
 		this.currentLocation = currentLocation;
 	}
 
-	public int getDegrees() {
-		return degrees;
+	public int getDirection() {
+		if(direction > 360) {
+			return direction - 360;
+		}
+		return direction;
 	}
 
-	public void setDegrees(int degrees) {
-		this.degrees = degrees;
+	public void setDirection(int direction) {
+		this.direction = direction;
 	}
 
 	public String getInput() {
@@ -46,9 +49,9 @@ public class Turtle {
 		this.input = input;
 	}
 
-	void move(int distance) {
+	public void move(int distance) {
 		if (!isPenUp) {
-			double radians = Math.toRadians(this.getDegrees());
+			double radians = Math.toRadians(this.getDirection());
 			double deltaX = Math.cos(radians) * distance;
 			double deltaY = Math.sin(radians) * distance;
 			double x = roundToTwoDigits(deltaX
@@ -67,25 +70,27 @@ public class Turtle {
 		return Math.round(value * 100.0) / 100.0;
 	}
 
-	void turn(int degrees) {
-		this.setDegrees(this.getDegrees() + degrees);
+	public void turn(int degrees) {
+		this.setDirection(this.getDirection() + degrees);
 	}
 
-	void penUp() {
+	public void penUp() {
 		this.isPenUp = true;
 	}
 
-	void penDown() {
+	public void penDown() {
 		this.isPenUp = false;
 	}
 
 	boolean isPenUp() {
-		return true;
+		return isPenUp;
 	}
 
-	//TODO
 	int direction() {
-		return 1;
+		if(direction > 360) {
+			return direction - 360;
+		}
+		return direction;
 	}
 
 	@Override
