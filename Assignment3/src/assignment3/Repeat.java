@@ -1,21 +1,16 @@
 package assignment3;
 
-
-public class Repeat implements Command{
+public class Repeat extends Command {
 
 	protected int times;
-	Turtle turtle;
-	InterpretRepeat repeat;
-	
+
 	public Repeat(int times) {
+		expression = new ExpressionRepeat(times);
 		this.times = times;
 	}
-	
+
 	@Override
-	public void interpret(Turtle context) {
-		
-		repeat.interpret(context);
-		//turtle.setCurrentLocation(context.getCurrentLocation());
+	public void accept(Visitor visitor) {
+		visitor.visit(this);
 	}
-	
 }

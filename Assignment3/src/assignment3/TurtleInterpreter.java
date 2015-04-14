@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.stream.Stream;
 
 public class TurtleInterpreter {
 
@@ -18,54 +19,82 @@ public class TurtleInterpreter {
 	private static final String PENUP = "penUp";
 	private static final String PENDOWN = "penDown";
 	private static ArrayList<Command> statements;
-	private static ArrayList<Interpreter> expressions;
+	private static ArrayList<Expression> expressions;
 	private static Turtle turtle;
 	private static int repetations;
+	private static int repeatCount;
+	private static int endCount;
+	private static ArrayList<String> repeatList;
 	private static HashMap<String, String> variables = new HashMap<String, String>();
-	
+	private static TurtleVisitor visitor = new TurtleVisitor();
+
 	private static ArrayList<Command> readFile() {
 		ArrayList<Command> commands = new ArrayList<Command>();
 		Path path = Paths.get("src/example.txt");
 		try {
-			Files.lines(path).forEach(statement -> {
-				
-				String[] tokens = statement.split(" ");
+			Stream<String> lines = Files.lines(path);
+			Iterator<String> inputIterator = lines.iterator();
+			while (inputIterator.hasNext()) {
+				String data = inputIterator.next();
+				String[] tokens = data.split(" ");
 				String key = tokens[0].trim();
 				String value = null;
-				
-				if(key.startsWith("$")) {
-					variables.put(tokens[0], tokens[2]);					
+
+				if (key.startsWith("$")) {
+					variables.put(tokens[0], tokens[2]);
 					value = variables.get(key);
-				} else if(tokens.length > 1){
+				} else if (tokens.length > 1) {
 					value = tokens[1];
 				}
+
 				switch (key) {
 				case PENUP:
-					commands.add(new PenUp());
+					PenUp penUp = new PenUp();
+					penUp.accept(visitor);
+					// commands.add(new PenUp());
 					break;
 				case PENDOWN:
-					commands.add(new PenDown());
+					PenDown penDown = new PenDown();
+					penDown.accept(visitor);
+					// commands.add(new PenDown());
 					break;
-				case MOVE:		
-					commands.add(new Move(Integer.parseInt(value)));
+				case MOVE:
+					Move move = new Move(Integer.parseInt(value));
+					move.accept(visitor);
+					// commands.add(new Move(Integer.parseInt(value)));
 					break;
 				case TURN:
-					commands.add(new Turn(Integer.parseInt(value)));
+					Turn turn = new Turn(Integer.parseInt(value));
+					turn.accept(visitor);
+					// commands.add(new Turn(Integer.parseInt(value)));
 					break;
 				case REPEAT:
-					if(value.startsWith("$")) {
-						commands.add(new Repeat(Integer.parseInt(variables.get(value))));
-					} else {
-						commands.add(new Repeat(Integer.parseInt(value)));}
+//					Repeat repeat = new Repeat(Integer.parseInt(value));
+//					repeat.accept(visitor);
+					repeatCount++;
+					repeatList = new ArrayList<String>();
+					repeatList.add(data.trim());
+					while (repeatCount != endCount && inputIterator.hasNext()) {
+						data = inputIterator.next();
+
+						if (data.contains("repeat")) {
+							repeatCount++;
+						}
+						if (data.contains("end")) {
+							endCount++;
+						}
+						repeatList.add(data.trim());
+					}
 					break;
 				case END:
-					commands.add(new End());
+					End end = new End();
+					end.accept(visitor);
+					// commands.add(new End());
 					break;
 				default:
 					break;
 				}
-			});
-
+			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -73,49 +102,56 @@ public class TurtleInterpreter {
 		}
 		return commands;
 	}
-	
-	private static ArrayList<Interpreter> readInterpreter() {
-		ArrayList<Interpreter> commands = new ArrayList<Interpreter>();
+
+	private static ArrayList<Expression> readInterpreter() {
+		ArrayList<Expression> commands = new ArrayList<Expression>();
 		Path path = Paths.get("src/example.txt");
 		try {
-			Files.lines(path).forEach(statement -> {
-				
-				String[] tokens = statement.split(" ");
-				String key = tokens[0].trim();
-				String value = null;
-				
-				if(key.startsWith("$")) {
-					variables.put(tokens[0], tokens[2]);					
-					value = variables.get(key);
-				} else if(tokens.length > 1){
-					value = tokens[1];
-				}
-				switch (key) {
-				case PENUP:
-					commands.add(new InterpretPenUp());
-					break;
-				case PENDOWN:
-					commands.add(new InterpretPenDown());
-					break;
-				case MOVE:		
-					commands.add(new InterpretMove(Integer.parseInt(value)));
-					break;
-				case TURN:
-					commands.add(new InterpretTurn(Integer.parseInt(value)));
-					break;
-				case REPEAT:
-					if(value.startsWith("$")) {
-						commands.add(new InterpretRepeat(Integer.parseInt(variables.get(value))));
-					} else {
-						commands.add(new InterpretRepeat(Integer.parseInt(value)));}
-					break;
-				case END:
-					commands.add(new InterpretEnd());
-					break;
-				default:
-					break;
-				}
-			});
+			Files.lines(path).forEach(
+					statement -> {
+
+						String[] tokens = statement.split(" ");
+						String key = tokens[0].trim();
+						String value = null;
+
+						if (key.startsWith("$")) {
+							variables.put(tokens[0], tokens[2]);
+							value = variables.get(key);
+						} else if (tokens.length > 1) {
+							value = tokens[1];
+						}
+
+						switch (key) {
+						case PENUP:
+							commands.add(new ExpressionPenUp());
+							break;
+						case PENDOWN:
+							commands.add(new ExpressionPenDown());
+							break;
+						case MOVE:
+							commands.add(new ExpressionMove(Integer
+									.parseInt(value)));
+							break;
+						case TURN:
+							commands.add(new ExpressionTurn(Integer
+									.parseInt(value)));
+							break;
+						case REPEAT:
+							if (value.startsWith("$")) {
+								commands.add(new ExpressionRepeat(Integer
+										.parseInt(variables.get(value))));
+							} else {
+								commands.add(new ExpressionRepeat(Integer
+										.parseInt(value)));
+							}
+							break;
+						case END:
+							commands.add(new ExpressionEnd());
+							break;
+						default:
+							break;
+						}
+					});
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -139,7 +175,7 @@ public class TurtleInterpreter {
 					if (currentCommand.getClass() != End.class) {
 						statements.add(currentCommand);
 					}
-				}			
+				}
 			} else {
 				currentCommand.interpret(turtle);
 			}
@@ -149,22 +185,22 @@ public class TurtleInterpreter {
 			interpretCommand(statements);
 		}
 	}
-	
-	private static void interpretExpression(ArrayList<Interpreter> list) {
 
-		Iterator<Interpreter> listIterator = list.iterator();
+	private static void interpretExpression(ArrayList<Expression> list) {
+
+		Iterator<Expression> listIterator = list.iterator();
 
 		while (listIterator.hasNext()) {
-			Interpreter currentInterpreter = listIterator.next();
-			if (currentInterpreter.getClass() == InterpretRepeat.class) {
-				repetations = ((InterpretRepeat) currentInterpreter).times;
-				expressions = new ArrayList<Interpreter>();
-				while (currentInterpreter.getClass() != InterpretEnd.class) {
+			Expression currentInterpreter = listIterator.next();
+			if (currentInterpreter.getClass() == ExpressionRepeat.class) {
+				repetations = ((ExpressionRepeat) currentInterpreter).times;
+				expressions = new ArrayList<Expression>();
+				while (currentInterpreter.getClass() != ExpressionEnd.class) {
 					currentInterpreter = listIterator.next();
-					if (currentInterpreter.getClass() != InterpretEnd.class) {
+					if (currentInterpreter.getClass() != ExpressionEnd.class) {
 						expressions.add(currentInterpreter);
 					}
-				}			
+				}
 			} else {
 				currentInterpreter.interpret(turtle);
 			}
@@ -175,19 +211,19 @@ public class TurtleInterpreter {
 		}
 	}
 
-	
-	//TODO: Replace this with test cases
+	// TODO: Replace this with test cases
 	public static void main(String[] args) {
-//		expressions = new ArrayList<Interpreter>();
-//		expressions = readInterpreter();
-//		turtle = new Turtle();
-//		interpretExpression(expressions);
-		
+		// expressions = new ArrayList<Interpreter>();
+		// expressions = readInterpreter();
+		// turtle = new Turtle();
+		// interpretExpression(expressions);
+
 		statements = new ArrayList<Command>();
-		statements = readFile();
+		// statements = readFile();
+		readFile();
+		statements = visitor.listOfCommands;
 		turtle = new Turtle();
 		interpretCommand(statements);
 		System.out.println(turtle);
 	}
 }
-

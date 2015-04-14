@@ -3,17 +3,17 @@ package assignment3;
 import java.awt.geom.Point2D;
 
 public class Turtle {
-	
+
 	private Point2D currentLocation;
 	private int degrees;
 	private String input;
 	private int distance;
 	private boolean isPenUp = false;
-	
+
 	public Turtle() {
-		this.currentLocation = new Point2D.Double(0,0);
+		this.currentLocation = new Point2D.Double(0, 0);
 	}
-	
+
 	public int getDistance() {
 		return distance;
 	}
@@ -47,46 +47,47 @@ public class Turtle {
 	}
 
 	void move(int distance) {
-		if(!isPenUp) {
+		if (!isPenUp) {
 			double radians = Math.toRadians(this.getDegrees());
 			double deltaX = Math.cos(radians) * distance;
 			double deltaY = Math.sin(radians) * distance;
-			double x = roundToTwoDigits(deltaX + this.getCurrentLocation().getX());
-			double y = roundToTwoDigits(deltaY + this.getCurrentLocation().getY());
-			this.currentLocation.setLocation(x,y);
+			double x = roundToTwoDigits(deltaX
+					+ this.getCurrentLocation().getX());
+			double y = roundToTwoDigits(deltaY
+					+ this.getCurrentLocation().getY());
+			this.currentLocation.setLocation(x, y);
 			this.setDistance(distance + this.getDistance());
 		} else {
-			throw new UnsupportedOperationException("Turtle cannot draw right now.");
+			throw new UnsupportedOperationException(
+					"Turtle cannot draw right now.");
 		}
-		
 	}
-	
+
 	private double roundToTwoDigits(Double value) {
 		return Math.round(value * 100.0) / 100.0;
 	}
-	
+
 	void turn(int degrees) {
-//		Command e = new Turn(String.valueOf(degrees));
-//		e.interpret(this);
 		this.setDegrees(this.getDegrees() + degrees);
 	}
-	
+
 	void penUp() {
 		this.isPenUp = true;
 	}
-	
+
 	void penDown() {
 		this.isPenUp = false;
 	}
-	
+
 	boolean isPenUp() {
 		return true;
 	}
-	
-//	int direction() {
-//		return 1;
-//	}
-	
+
+	//TODO
+	int direction() {
+		return 1;
+	}
+
 	@Override
 	public String toString() {
 		return currentLocation.getX() + " " + currentLocation.getY();

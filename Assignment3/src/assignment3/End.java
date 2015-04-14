@@ -1,11 +1,14 @@
 package assignment3;
 
+public class End extends Command {
 
-public class End implements Command {
-
+	public End() {
+		expression = new ExpressionEnd();
+	}
+	
 	@Override
-	public void interpret(Turtle context) {
-		
+	public void accept(Visitor visitor) {
+		visitor.visit(this);
 	}
 
 }

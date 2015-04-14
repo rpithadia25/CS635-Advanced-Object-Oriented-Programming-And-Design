@@ -1,11 +1,9 @@
 package assignment3;
 
-
-public class InterpretPenUp extends Interpreter {
+public class ExpressionPenDown extends Expression {
 
 	@Override
 	void interpret(Turtle context) {
-		context.penUp();
+		context.penDown();
 	}
-
 }

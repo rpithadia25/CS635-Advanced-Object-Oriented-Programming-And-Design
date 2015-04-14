@@ -1,6 +1,13 @@
 package assignment3;
 
+public abstract class Command {
 
-public interface Command {
-	public void interpret(Turtle context);
+	protected Expression expression;
+
+	public void interpret(Turtle context) {
+		expression.interpret(context);
+	}
+
+	public abstract void accept(Visitor visitor);
+
 }

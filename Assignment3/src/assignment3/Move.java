@@ -1,20 +1,16 @@
 package assignment3;
 
+public class Move extends Command {
 
-public class Move implements Command {
-	
-	private int distance;
-	InterpretMove move;
-	
-	public Move(int distance) {
+	protected int distance;
+
+	public Move(int distance) {		
+		expression = new ExpressionMove(distance);
 		this.distance = distance;
 	}
-	
+
 	@Override
-	public void interpret(Turtle context) {
-		//context.move(distance);
-		move =  new InterpretMove(distance);
-		context.setDistance(distance);
-		move.interpret(context);
+	public void accept(Visitor visitor) {
+		visitor.visit(this);
 	}
 }

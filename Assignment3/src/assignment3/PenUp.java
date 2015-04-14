@@ -1,13 +1,13 @@
 package assignment3;
 
+public class PenUp extends Command {
 
-public class PenUp implements Command {
-
-	Interpreter penUp;
-	@Override
-	public void interpret(Turtle context) {
-		penUp = new InterpretPenUp();
-		penUp.interpret(context);
+	public PenUp() {
+		expression = new ExpressionPenUp();
 	}
 
+	@Override
+	public void accept(Visitor visitor) {
+		visitor.visit(this);
+	}
 }

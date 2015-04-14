@@ -1,24 +1,16 @@
 package assignment3;
 
-
-public class Turn implements Command{
+public class Turn extends Command {
 
 	protected int degrees;
-	InterpretTurn turn;
-	
+
 	public Turn(int degrees) {
+		expression = new ExpressionTurn(degrees);
 		this.degrees = degrees;
 	}
-	
+
 	@Override
-	public void interpret(Turtle context) {
-		turn = new InterpretTurn(degrees);
-		turn.interpret(context);
-		//context.turn(degrees);
-		
-		
-		
-		
-		//context.setDegrees(context.getDegrees() + turtle.getDegrees());
+	public void accept(Visitor visitor) {
+		visitor.visit(this);
 	}
 }

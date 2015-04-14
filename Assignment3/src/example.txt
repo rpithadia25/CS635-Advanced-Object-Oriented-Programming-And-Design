@@ -1,8 +1,5 @@
-$length = 5
-penUp
-penDown
+move 10
+turn 90 
+move 20 
+turn -60 
 move 15
-repeat $length
-	move 10
-	turn 30
-end
