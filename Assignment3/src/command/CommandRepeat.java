@@ -1,6 +1,6 @@
 package command;
 
-import visitor.Visitor;
+import visitor.TurtleVisitor;
 import interpreter.ExpressionRepeat;
 
 public class CommandRepeat extends Command {
@@ -13,7 +13,7 @@ public class CommandRepeat extends Command {
 	}
 
 	@Override
-	public void accept(Visitor visitor) {
+	public void accept(TurtleVisitor visitor) {
 		visitor.visit(this);
 	}
 

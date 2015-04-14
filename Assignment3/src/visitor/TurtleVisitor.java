@@ -10,39 +10,18 @@ import command.CommandPenUp;
 import command.CommandRepeat;
 import command.CommandTurn;
 
-public class TurtleVisitor extends Visitor {
+public abstract class TurtleVisitor {
+	public ArrayList<Command> listOfCommands = new ArrayList<Command>();
 
-	public ArrayList<Command> getCommands() {
-		return listOfCommands;
-	}
+	public abstract void visit(CommandMove move);
 
-	@Override
-	public void visit(CommandMove move) {
-		listOfCommands.add(move);
-	}
+	public abstract void visit(CommandTurn turn);
 
-	@Override
-	public void visit(CommandTurn turn) {
-		listOfCommands.add(turn);
-	}
+	public abstract void visit(CommandRepeat repeat);
 
-	@Override
-	public void visit(CommandRepeat repeat) {
-		listOfCommands.add(repeat);
-	}
+	public abstract void visit(CommandPenUp penUp);
 
-	@Override
-	public void visit(CommandPenUp penUp) {
-		listOfCommands.add(penUp);
-	}
+	public abstract void visit(CommandPenDown penDown);
 
-	@Override
-	public void visit(CommandPenDown penDown) {
-		listOfCommands.add(penDown);
-	}
-
-	@Override
-	public void visit(CommandEnd end) {
-		listOfCommands.add(end);
-	}
+	public abstract void visit(CommandEnd end);
 }

@@ -1,6 +1,6 @@
 package command;
 
-import visitor.Visitor;
+import visitor.TurtleVisitor;
 import interpreter.ExpressionEnd;
 
 public class CommandEnd extends Command {
@@ -10,7 +10,7 @@ public class CommandEnd extends Command {
 	}
 
 	@Override
-	public void accept(Visitor visitor) {
+	public void accept(TurtleVisitor visitor) {
 		visitor.visit(this);
 	}
 

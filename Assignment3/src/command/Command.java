@@ -1,6 +1,6 @@
 package command;
 
-import visitor.Visitor;
+import visitor.TurtleVisitor;
 import interpreter.Expression;
 import assignment3.Turtle;
 
@@ -12,6 +12,6 @@ public abstract class Command {
 		expression.interpret(context);
 	}
 
-	public abstract void accept(Visitor visitor);
+	public abstract void accept(TurtleVisitor visitor);
 
 }

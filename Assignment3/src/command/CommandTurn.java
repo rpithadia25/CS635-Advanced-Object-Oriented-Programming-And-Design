@@ -1,6 +1,6 @@
 package command;
 
-import visitor.Visitor;
+import visitor.TurtleVisitor;
 import interpreter.ExpressionTurn;
 
 public class CommandTurn extends Command {
@@ -13,7 +13,7 @@ public class CommandTurn extends Command {
 	}
 
 	@Override
-	public void accept(Visitor visitor) {
+	public void accept(TurtleVisitor visitor) {
 		visitor.visit(this);
 	}
 

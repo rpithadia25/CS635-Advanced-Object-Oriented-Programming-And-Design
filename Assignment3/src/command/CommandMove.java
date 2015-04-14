@@ -1,6 +1,7 @@
 package command;
 
-import visitor.Visitor;
+import visitor.DistanceVisitor;
+import visitor.TurtleVisitor;
 import interpreter.ExpressionMove;
 
 public class CommandMove extends Command {
@@ -13,8 +14,16 @@ public class CommandMove extends Command {
 	}
 
 	@Override
-	public void accept(Visitor visitor) {
+	public void accept(TurtleVisitor visitor) {
 		visitor.visit(this);
 	}
-
+	
+	public int acceptDistanceCovered(DistanceVisitor visitor) {
+		return visitor.visit(this);
+	}
+	
+	public int getDistance() {
+		return distance;
+	}
+	
 }

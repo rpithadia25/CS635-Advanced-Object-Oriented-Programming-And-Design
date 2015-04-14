@@ -35,7 +35,9 @@ public class TurtleVisitorTest {
 	protected double delta = 1e-8;
 	protected int repeatCount;
 	protected int endCount;
-	protected TurtleVisitor turtleVisitor = new TurtleVisitor();
+	protected TurtleVisitorImpl turtleVisitor = new TurtleVisitorImpl();
+	protected DistanceVisitorImpl distanceCoveredVisitor = new DistanceVisitorImpl();
+	protected int distanceCovered;
 	protected ArrayList<String> repeatList;
 	
 	private ArrayList<Command> readFile(String filePath) {
@@ -69,6 +71,7 @@ public class TurtleVisitorTest {
 				case Constants.MOVE:
 					CommandMove move = new CommandMove(Integer.parseInt(value));
 					move.accept(turtleVisitor);
+					distanceCovered = move.acceptDistanceCovered(distanceCoveredVisitor);
 					break;
 				case Constants.TURN:
 					CommandTurn turn = new CommandTurn(Integer.parseInt(value));
@@ -168,6 +171,14 @@ public class TurtleVisitorTest {
 		statements = turtleVisitor.listOfCommands;
 		interpretCommand(statements);
 		assertEquals(30, turtle.getDirection(), delta);
+	}
+	
+	@Test
+	public void testDistanceCovered() {
+		readFile("src/testProgram1.txt");
+		statements = turtleVisitor.listOfCommands;
+		interpretCommand(statements);
+		assertEquals(45, distanceCoveredVisitor.getDistanceCovered());
 	}
 	
 	@Test

@@ -18,7 +18,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
-import visitor.TurtleVisitor;
+import visitor.DistanceVisitorImpl;
+import visitor.TurtleVisitorImpl;
 import command.Command;
 import command.CommandEnd;
 import command.CommandMove;
@@ -43,11 +44,13 @@ public class RunProgram {
 	private static int endCount;
 	private static ArrayList<String> repeatList;
 	private static HashMap<String, String> variables = new HashMap<String, String>();
-	private static TurtleVisitor visitor = new TurtleVisitor();
+	private static TurtleVisitorImpl visitor = new TurtleVisitorImpl();
+	private static DistanceVisitorImpl distanceCoveredVisitor = new DistanceVisitorImpl();
+	private static int distanceCovered;
 
 	private static ArrayList<Command> readFile() {
 		ArrayList<Command> commands = new ArrayList<Command>();
-		Path path = Paths.get("src/example.txt");
+		Path path = Paths.get("src/testProgram1.txt");
 		try {
 			Stream<String> lines = Files.lines(path);
 			Iterator<String> inputIterator = lines.iterator();
@@ -78,6 +81,7 @@ public class RunProgram {
 				case MOVE:
 					CommandMove move = new CommandMove(Integer.parseInt(value));
 					move.accept(visitor);
+					distanceCovered = move.acceptDistanceCovered(distanceCoveredVisitor);
 					// commands.add(new Move(Integer.parseInt(value)));
 					break;
 				case TURN:
@@ -122,7 +126,7 @@ public class RunProgram {
 
 	private static ArrayList<Expression> readInterpreter() {
 		ArrayList<Expression> commands = new ArrayList<Expression>();
-		Path path = Paths.get("src/example.txt");
+		Path path = Paths.get("src/testProgram1.txt");
 		try {
 			Files.lines(path).forEach(
 					statement -> {
@@ -242,5 +246,6 @@ public class RunProgram {
 		turtle = new Turtle();
 		interpretCommand(statements);
 		System.out.println(turtle);
+		System.out.println(distanceCoveredVisitor.getDistanceCovered());
 	}
 }
