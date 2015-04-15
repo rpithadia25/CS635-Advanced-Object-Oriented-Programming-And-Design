@@ -1,11 +1,11 @@
 package interpreter;
 
-import assignment3.Turtle;
+import assignment3.Context;
 
 public class ExpressionPenUp extends Expression {
 
 	@Override
-	public void interpret(Turtle context) {
+	public void interpret(Context context) {
 		context.penUp();
 	}
 

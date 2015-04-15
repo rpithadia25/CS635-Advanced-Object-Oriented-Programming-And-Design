@@ -2,7 +2,7 @@ package assignment3;
 
 import java.awt.geom.Point2D;
 
-public class Turtle {
+public class Turtle implements Context{
 
 	private Point2D currentLocation;
 	private int direction;
@@ -82,11 +82,11 @@ public class Turtle {
 		this.isPenUp = false;
 	}
 
-	boolean isPenUp() {
+	public boolean isPenUp() {
 		return isPenUp;
 	}
 
-	int direction() {
+	public int direction() {
 		if(direction > 360) {
 			return direction - 360;
 		}

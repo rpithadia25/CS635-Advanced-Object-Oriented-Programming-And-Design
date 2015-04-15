@@ -1,11 +1,11 @@
 package interpreter;
 
-import assignment3.Turtle;
+import assignment3.Context;
 
 public abstract class Expression {
 
 	public int data;
 
-	public abstract void interpret(Turtle context);
+	public abstract void interpret(Context context);
 
 }

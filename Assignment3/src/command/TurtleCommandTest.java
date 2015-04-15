@@ -28,6 +28,7 @@ public class TurtleCommandTest {
 	protected int repetations;
 	protected Point2D expectedLocation = null;
 	protected double delta = 1e-8;
+	protected CommandManager manager = new CommandManager();
 
 	private ArrayList<Command> readFile(String filePath) {
 		ArrayList<Command> commands = new ArrayList<Command>();
@@ -150,4 +151,17 @@ public class TurtleCommandTest {
 		interpretCommand(commands);
 		assertEquals(30, turtle.getDirection(), delta);
 	}
+	
+	@Test
+	public void testUndo() {
+		commands = readFile("src/testProgram1.txt");
+		Iterator<Command> commandIterator = commands.iterator();
+		while(commandIterator.hasNext()) {
+			Command command = commandIterator.next();
+			manager.execute(command, turtle);
+		}
+		manager.undo(turtle);
+		assertEquals(10, turtle.getCurrentLocation().getX(), delta);
+	}
+
 }

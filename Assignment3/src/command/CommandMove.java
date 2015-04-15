@@ -1,5 +1,6 @@
 package command;
 
+import assignment3.Context;
 import visitor.DistanceVisitor;
 import visitor.TurtleVisitor;
 import interpreter.ExpressionMove;
@@ -24,6 +25,12 @@ public class CommandMove extends Command {
 	
 	public int getDistance() {
 		return distance;
+	}
+
+	@Override
+	public void undo(Context context) {
+		context = previousContext;
+		context.move(-distance);
 	}
 	
 }
